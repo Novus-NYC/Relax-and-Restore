@@ -1,10 +1,12 @@
 import "./globals.css"
 import Navbar from "@/lib/components/navbar"
 import Footer from "@/lib/components/footer"
+import type { Metadata } from "next"
 
-export const metadata = {
-  title: "Business Name",
-  description: "Short description of the business."
+export const metadata: Metadata = {
+  title: { default: "Relax & Restore | Custom Massage", template: "%s | Relax & Restore" },
+  description: "Custom therapeutic massage sessions, available in-suite or mobile.",
+  icons: { icon: "/favicon.svg" },
 }
 
 export default function RootLayout({
@@ -14,11 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col">
+      <body>
         <Navbar />
-        <main className="flex-1 max-w-6xl mx-auto px-6 py-12">
-          {children}
-        </main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

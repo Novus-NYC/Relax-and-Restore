@@ -1,21 +1,29 @@
 import Link from "next/link"
+import { site } from "@/lib/site"
 
 export default function Footer() {
   return (
-    <footer className="border-t mt-16">
-      <div className="max-w-6xl mx-auto px-6 py-8 text-sm text-gray-500 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-col gap-1">
-          <div>© {new Date().getFullYear()} Business Name</div>
-          <Link
-            href="https://www.novusnyc.org/"
-            target="_blank"
-            rel="noreferrer"
-            className="text-[#F6B78D] hover:text-[#F6B78D] hover:underline"
-          >
-            Made by Novus
-          </Link>
+    <footer className="site-footer">
+      <div className="footer-grid">
+        <div>
+          <Link href="/" className="footer-logo"><span>R</span> Relax &amp; Restore</Link>
+          <p>Custom therapeutic massage, designed around the way you want to feel.</p>
         </div>
-        <div>Built with Volta</div>
+        <div>
+          <p className="footer-label">Explore</p>
+          <Link href="/services">Services</Link>
+          <Link href="/about">Our approach</Link>
+          <Link href="/booking">Booking &amp; hours</Link>
+        </div>
+        <div>
+          <p className="footer-label">Connect</p>
+          <a href={site.phoneHref}>{site.phoneDisplay}</a>
+          <a href={site.bookingUrl} target="_blank" rel="noreferrer">Book on Booksy ↗</a>
+        </div>
+      </div>
+      <div className="footer-bottom">
+        <span>© {new Date().getFullYear()} {site.legalName}</span>
+        <a href="https://novusnyc.org" target="_blank" rel="noreferrer">Made by Novus</a>
       </div>
     </footer>
   )
