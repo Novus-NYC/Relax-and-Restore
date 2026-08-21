@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 import type { ReactNode } from "react"
 
-export default function ScrollScene({ children, className = "" }: { children: ReactNode; className?: string }) {
+export default function ScrollScene({ children, className = "", as: Tag = "div" }: { children: ReactNode; className?: string; as?: "div" | "section" }) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -30,5 +30,5 @@ export default function ScrollScene({ children, className = "" }: { children: Re
     }
   }, [])
 
-  return <div ref={ref} className={`scroll-scene ${className}`}>{children}</div>
+  return <Tag ref={ref} className={`scroll-scene ${className}`}>{children}</Tag>
 }

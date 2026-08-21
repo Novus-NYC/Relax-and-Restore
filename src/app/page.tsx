@@ -65,12 +65,12 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      <section className="closing-section closing-art">
+      <ScrollScene as="section" className="closing-section closing-art">
         <div className="closing-orb closing-orb-one" aria-hidden="true" />
         <div className="closing-orb closing-orb-two" aria-hidden="true" />
         <div className="closing-linework" aria-hidden="true" />
         <div className="closing-content"><a className="button button-light reserve-button" href={site.bookingUrl} target="_blank" rel="noreferrer">Reserve your time <span>↗</span></a></div>
-      </section>
+      </ScrollScene>
     </>
   )
 }
