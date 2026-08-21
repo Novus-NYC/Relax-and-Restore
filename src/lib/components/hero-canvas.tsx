@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react"
 
+type CanvasVariant = "home" | "services" | "about" | "booking"
+
 const vertexShader = `
   attribute vec2 a_position;
   void main() {
@@ -13,6 +15,7 @@ const fragmentShader = `
   precision highp float;
   uniform vec2 u_resolution;
   uniform float u_time;
+  uniform float u_variant;
 
   float wave(vec2 p, float speed, float scale, float offset) {
     return sin(p.x * scale + p.y * (scale * .65) + u_time * speed + offset);
@@ -28,6 +31,21 @@ const fragmentShader = `
     vec3 deep = vec3(.055, .13, .14);
     vec3 teal = vec3(.14, .31, .30);
     vec3 seafoam = vec3(.73, .76, .61);
+    if (u_variant > .5 && u_variant < 1.5) {
+      deep = vec3(.07, .18, .14);
+      teal = vec3(.22, .38, .22);
+      seafoam = vec3(.80, .72, .51);
+    }
+    if (u_variant > 1.5 && u_variant < 2.5) {
+      deep = vec3(.12, .12, .13);
+      teal = vec3(.31, .23, .21);
+      seafoam = vec3(.83, .65, .53);
+    }
+    if (u_variant > 2.5) {
+      deep = vec3(.26, .18, .14);
+      teal = vec3(.49, .31, .22);
+      seafoam = vec3(.90, .82, .62);
+    }
     float ribbon = smoothstep(.50, .05, abs(p.y + field * .075 + drift));
     float glow = smoothstep(.8, .0, length(p - vec2(.38, -.05))) * .35;
     vec3 color = mix(deep, teal, uv.y + .22);
@@ -37,7 +55,7 @@ const fragmentShader = `
   }
 `
 
-export default function HeroCanvas() {
+export default function HeroCanvas({ variant = "home", className = "hero-canvas" }: { variant?: CanvasVariant; className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -67,6 +85,8 @@ export default function HeroCanvas() {
     const position = gl.getAttribLocation(program, "a_position")
     const resolution = gl.getUniformLocation(program, "u_resolution")
     const time = gl.getUniformLocation(program, "u_time")
+    const variantUniform = gl.getUniformLocation(program, "u_variant")
+    const variantNumber = { home: 0, services: 1, about: 2, booking: 3 }[variant]
     const buffer = gl.createBuffer()
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer)
     gl.bufferData(
@@ -92,12 +112,13 @@ export default function HeroCanvas() {
       resize()
       gl.uniform2f(resolution, canvas.width, canvas.height)
       gl.uniform1f(time, milliseconds / 1000)
+      gl.uniform1f(variantUniform, variantNumber)
       gl.drawArrays(gl.TRIANGLES, 0, 6)
       frame = requestAnimationFrame(render)
     }
     frame = requestAnimationFrame(render)
     return () => cancelAnimationFrame(frame)
-  }, [])
+  }, [variant])
 
-  return <canvas ref={canvasRef} aria-hidden="true" className="hero-canvas" />
+  return <canvas ref={canvasRef} aria-hidden="true" className={className} />
 }

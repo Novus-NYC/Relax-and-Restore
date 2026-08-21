@@ -65,10 +65,11 @@ export default function HomePage() {
         </Reveal>
       </section>
 
-      <section className="closing-section">
-        <Image src="/images/relax-restore-detail.jpg" alt="Relax & Restore massage essentials" fill sizes="100vw" />
-        <div className="closing-overlay" />
-        <Reveal><div className="closing-content"><p className="eyebrow light-eyebrow">Your next exhale</p><h2>Feel better<br />in your body.</h2><a className="button button-light" href={site.bookingUrl} target="_blank" rel="noreferrer">Reserve your time <span>↗</span></a></div></Reveal>
+      <section className="closing-section closing-art">
+        <div className="closing-orb closing-orb-one" aria-hidden="true" />
+        <div className="closing-orb closing-orb-two" aria-hidden="true" />
+        <div className="closing-linework" aria-hidden="true" />
+        <div className="closing-content"><a className="button button-light reserve-button" href={site.bookingUrl} target="_blank" rel="noreferrer">Reserve your time <span>↗</span></a></div>
       </section>
     </>
   )
