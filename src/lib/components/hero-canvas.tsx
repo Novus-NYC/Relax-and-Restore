@@ -25,14 +25,14 @@ const fragmentShader = `
     float t = u_time * .13;
     float field = wave(p, .7, 5.2, 0.) + wave(p, -.4, 8.0, 2.2) * .45;
     float drift = sin(length(p) * 6. + t) * .1;
-    vec3 deep = vec3(.035, .105, .12);
-    vec3 teal = vec3(.075, .42, .43);
-    vec3 seafoam = vec3(.60, .85, .76);
+    vec3 deep = vec3(.055, .13, .14);
+    vec3 teal = vec3(.14, .31, .30);
+    vec3 seafoam = vec3(.73, .76, .61);
     float ribbon = smoothstep(.50, .05, abs(p.y + field * .075 + drift));
     float glow = smoothstep(.8, .0, length(p - vec2(.38, -.05))) * .35;
     vec3 color = mix(deep, teal, uv.y + .22);
-    color = mix(color, seafoam, ribbon * .4);
-    color += seafoam * glow;
+    color = mix(color, seafoam, ribbon * .24);
+    color += seafoam * glow * .7;
     gl_FragColor = vec4(color, 1.0);
   }
 `

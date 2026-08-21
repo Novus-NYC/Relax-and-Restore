@@ -22,8 +22,8 @@ export default function Navbar() {
     <header className={`site-header ${scrolled || pathname !== "/" ? "is-scrolled" : ""}`}>
       <nav className="site-nav" aria-label="Main navigation">
         <Link href="/" className="brand" onClick={close}>
-          <span className="brand-mark" aria-hidden="true">R</span>
-          <span><b>Relax</b> &amp; Restore</span>
+          <span className="brand-mark" aria-hidden="true"><i /><i /></span>
+          <span><b>Relax</b> &amp; Restore<small>massage therapy</small></span>
         </Link>
         <div className="nav-links" aria-label="Primary links">
           <Link href="/services">Services</Link>
